@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Computer-accessories-store---Mobile-application-dev_customer.iml" filepath="$PROJECT_DIR$/Computer-accessories-store---Mobile-application-dev_customer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MacroTechnologies.iml" filepath="$PROJECT_DIR$/MacroTechnologies.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
