@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context=".RegisterActivity">
+
+    <EditText
+        android:id="@+id/register_username_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/inputs"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="500dp"
+        android:hint="Username"
+        android:paddingLeft="50dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textSize="20dp"
+        android:inputType="text"
+        android:textColorHint="@color/colorPrimary"
+        android:textColor="@color/textColor"
+        />
+
+    <EditText
+        android:id="@+id/register_email_input"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/inputs"
+        android:layout_marginTop="400dp"
+        android:layout_marginBottom="400dp"
+        android:hint="Email"
+        android:textSize="20dp"
+        android:inputType="textEmailAddress"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textColorHint="@color/colorPrimary"
+        android:textColor="@color/textColor"
+        android:paddingLeft="50dp"/>
+    <EditText
+        android:id="@+id/register_password_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/inputs"
+        android:layout_marginTop="400dp"
+        android:layout_marginBottom="300dp"
+        android:hint="Password"
+        android:textSize="20dp"
+        android:inputType="textPassword"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textColorHint="@color/colorPrimary"
+        android:textColor="@color/textColor"
+        android:paddingLeft="50dp"
+        />
+    <EditText
+        android:id="@+id/editReRegPwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/inputs"
+        android:layout_marginTop="400dp"
+        android:layout_marginBottom="200dp"
+        android:hint="Re Enter Password"
+        android:textSize="20dp"
+        android:textColor="@color/textColor"
+        android:inputType="textPassword"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textColorHint="@color/colorPrimary"
+
+        android:paddingLeft="50dp"/>
+    <Button
+        android:id="@+id/register_btn"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:background="@drawable/buttons"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:layout_marginLeft="75dp"
+        android:text="SignUP"
+        android:textSize="25dp"
+        android:textColor="@color/textColor"
+        />
+
+</RelativeLayout>

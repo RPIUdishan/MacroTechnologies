@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "442951229500",
+    "firebase_url": "https://macro-38ed3.firebaseio.com",
+    "project_id": "macro-38ed3",
+    "storage_bucket": "macro-38ed3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:442951229500:android:5401f846cc434e4e25a339",
+        "android_client_info": {
+          "package_name": "com.example.macro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "442951229500-n99vbd0aof4q7vhhjqkhgg8ootr5rcl8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.macro",
+            "certificate_hash": "bb835ead33fbb01b07b0b39a6294fe6d790b806f"
+          }
+        },
+        {
+          "client_id": "442951229500-sg796q6ij3noh795s1bnampaqn2t0fqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAt-0nU9tJcRQVxjbxYLWP5w3XsP_4H8Mw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "442951229500-sg796q6ij3noh795s1bnampaqn2t0fqo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
