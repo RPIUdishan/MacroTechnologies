@@ -37,6 +37,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.0.5'
     implementation 'com.google.firebase:firebase-core:16.0.7'
     implementation 'com.google.firebase:firebase-database:16.0.5'
+    implementation 'io.paperdb:paperdb:2.6'
 
 }
 

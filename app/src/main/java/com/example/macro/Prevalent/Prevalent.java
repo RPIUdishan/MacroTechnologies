@@ -4,7 +4,7 @@ import com.example.macro.Model.Customer;
 
 public class Prevalent {
 
-    private static Customer currentCustomer;
+    public static Customer currentCustomer ;
 
 
 }

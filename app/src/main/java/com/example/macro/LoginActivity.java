@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.macro.Model.Customer;
+
+import com.example.macro.Prevalent.Prevalent;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -83,10 +85,16 @@ public class LoginActivity extends AppCompatActivity {
                             loadingBar.dismiss();
 
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                           Prevalent.currentCustomer = customerData;
+                           Toast.makeText(LoginActivity.this, ".." +Prevalent.currentCustomer.getUserName(), Toast.LENGTH_SHORT ).show();
                             startActivity(intent);
+
+
                         }else{
                             loadingBar.dismiss();
                             Toast.makeText(LoginActivity.this, "Invalid Password", Toast.LENGTH_SHORT).show();
+
+
 
                         }
                     }

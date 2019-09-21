@@ -3,6 +3,7 @@ package com.example.macro;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.macro.Prevalent.Prevalent;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -23,23 +24,27 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+import io.paperdb.Paper;
+
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     RecyclerView recyclerView;
-    ProductAdapter adapter;
 
- List<Product> productList;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        Paper.init(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Store");
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +54,7 @@ public class HomeActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -57,70 +63,12 @@ public class HomeActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        //recycle view
-        productList=new ArrayList<>();
-        recyclerView=(RecyclerView) findViewById(R.id.recycle_view);
-        recyclerView.setHasFixedSize(true);
+        View headerView = navigationView.getHeaderView(0);
+        TextView usernameTextView = headerView.findViewById(R.id.user_profile_name);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
 
-
-        //adding some items to our list
-        productList.add(
-                new Product(
-                        1,
-                        "Apple MacBook Air Core i5 5th Gen - (8 GB/128 GB SSD/Mac OS Sierra)",
-                        "13.3 inch, Silver, 1.35 kg",
-                        4.3,
-                        60000,
-                        R.drawable.item1));
-
-        productList.add(
-                new Product(
-                        1,
-                        "Dell Inspiron 7000 Core i5 7th Gen - (8 GB/1 TB HDD/Windows 10 Home)",
-                        "14 inch, Gray, 1.659 kg",
-                        4.3,
-                        60000,
-                        R.drawable.item2));
-
-        productList.add(
-                new Product(
-                        1,
-                        "Microsoft Surface Pro 4 Core m3 6th Gen - (4 GB/128 GB SSD/Windows 10)",
-                        "13.3 inch, Silver, 1.35 kg",
-                        4.3,
-                        60000,
-                        R.drawable.item3));
-
-        productList.add(
-                new Product(
-                        1,
-                        "Microsoft Surface Pro 4 Core m3 6th Gen - (4 GB/128 GB SSD/Windows 10)",
-                        "13.3 inch, Silver, 1.35 kg",
-                        4.3,
-                        70000,
-                        R.drawable.item4));
-
-        productList.add(
-                new Product(
-                        1,
-                        "Microsoft Surface Pro 4 Core m3 6th Gen - (4 GB/128 GB SSD/Windows 10)",
-                        "13.3 inch, Silver, 1.35 kg",
-                        4.3,
-                        60000,
-                        R.drawable.item5));
-
-        productList.add(
-                new Product(
-                        1,
-                        "Microsoft Surface Pro 4 Core m3 6th Gen - (4 GB/128 GB SSD/Windows 10)",
-                        "13.3 inch, Silver, 1.35 kg",
-                        4.3,
-                        60000,
-                        R.drawable.item1));
-        adapter=new ProductAdapter(this,productList);
-        recyclerView.setAdapter(adapter);
+        usernameTextView.setText(Prevalent.currentCustomer.getUserName());
 
 
     }
@@ -144,9 +92,7 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
