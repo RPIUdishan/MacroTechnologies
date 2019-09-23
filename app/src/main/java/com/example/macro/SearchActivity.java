@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,11 +55,20 @@ public class SearchActivity extends AppCompatActivity {
 
         FirebaseRecyclerAdapter<Product, ProductViewHolder> adapter=new FirebaseRecyclerAdapter<Product, ProductViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull ProductViewHolder holder, int i, @NonNull Product model) {
+            protected void onBindViewHolder(@NonNull ProductViewHolder holder, int i, @NonNull final Product model) {
                 holder.txtProductName.setText(model.getPname());
                 holder.txtProductDescription.setText(model.getDescription());
                 holder.txtProductPrice.setText("Price : "+model.getPrice());
                 Picasso.get().load(model.getImage()).into(holder.imageView);
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent= new Intent(SearchActivity.this, ProductDetailsActivity.class);
+                        intent.putExtra("pid", model.getPid());
+                        startActivity(intent);
+                    }
+                });
 
             }
 
@@ -73,6 +83,6 @@ public class SearchActivity extends AppCompatActivity {
         };
         searchList.setAdapter(adapter);
         adapter.startListening();
-        ;
+
     }
 }

@@ -67,7 +67,7 @@
 
     </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
 
- <!--<Button
+ <Button
 
         android:id="@+id/add_cart_button"
         android:layout_width="400dp"
@@ -80,5 +80,5 @@
         android:layout_marginBottom="119dp"
         android:background="@color/orderButton"
         android:src="@drawable/nav_cart"
-        android:text="ADD to cart" />-->
+        android:text="ADD to cart" />
 </RelativeLayout>
