@@ -24,7 +24,7 @@ import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
     private Button CreateAccountButton;
-    private EditText InputName,InputEmail,InputPassword;
+    private EditText InputName,InputEmail,InputPassword,InputReEnteredPwd;
     private ProgressDialog loadingBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
         CreateAccountButton=(Button) findViewById(R.id.register_btn);
         InputName=(EditText) findViewById(R.id.register_username_input);
         InputPassword=(EditText) findViewById(R.id.register_password_input);
+        InputReEnteredPwd = (EditText) findViewById(R.id.editReRegPwd);
         InputEmail=(EditText)findViewById(R.id.register_email_input);
 
         loadingBar =new ProgressDialog(this );
@@ -50,7 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
         String userName = InputName.getText().toString();
         String email = InputEmail.getText().toString();
         String password = InputPassword.getText().toString();
-
+        String reEnteredPwd = InputReEnteredPwd.getText().toString();
 
         if(TextUtils.isEmpty(userName)){
             Toast.makeText(this,"Please enter your username",Toast.LENGTH_SHORT).show();
@@ -60,7 +61,10 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else if(TextUtils.isEmpty(password)){
             Toast.makeText(this,"Please enter your password",Toast.LENGTH_SHORT).show();
-        }else{
+        }else if(!password.equals(reEnteredPwd)){
+            Toast.makeText(this,"Password and Reentered Password is not equal.", Toast.LENGTH_SHORT).show();
+        }
+        else{
             loadingBar.setTitle("Create Account");
             loadingBar.setMessage("Please wait...");
             loadingBar.setCanceledOnTouchOutside(false);
