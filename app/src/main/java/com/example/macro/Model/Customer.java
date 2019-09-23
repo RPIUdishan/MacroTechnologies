@@ -1,16 +1,18 @@
 package com.example.macro.Model;
 
 public class Customer {
-    String userName, email, password;
-
-    public Customer(String userName, String email, String password) {
-        this.userName = userName;
-        this.email = email;
-        this.password = password;
-    }
+    String userName, email, password, image, address;
 
     public Customer() {
 
+    }
+
+    public Customer(String userName, String email, String password, String image, String address) {
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.image = image;
+        this.address = address;
     }
 
     public String getUserName() {
@@ -35,5 +37,21 @@ public class Customer {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
