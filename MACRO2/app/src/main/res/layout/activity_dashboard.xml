@@ -10,8 +10,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteY="8dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -29,6 +31,7 @@
                 android:textSize="22sp" />
 
             <TextView
+                android:id="@+id/emailtxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="85dp"
@@ -46,8 +49,7 @@
 
         <GridLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_height="403dp"
             android:alignmentMode="alignMargins"
             android:columnCount="2"
             android:columnOrderPreserved="false"
@@ -151,62 +153,63 @@
 
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="25dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="6dp">
+            <!--<androidx.cardview.widget.CardView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_rowWeight="1"-->
+                <!--android:layout_columnWeight="1"-->
+                <!--android:layout_margin="25dp"-->
+                <!--app:cardCornerRadius="12dp"-->
+                <!--app:cardElevation="6dp">-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="16dp">
+                <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:orientation="vertical"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:padding="16dp">&ndash;&gt;-->
 
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:src="@drawable/finance" />
+                    <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="80dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="80dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:src="@drawable/finance" />&ndash;&gt;-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Finance"
-                        android:textColor="#6f6f6f"
-                        android:textSize="18sp" />
+                    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:text="Finance"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textColor="#6f6f6f"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textSize="18sp" />&ndash;&gt;-->
 
-                </LinearLayout>
+                <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
 
-            </androidx.cardview.widget.CardView>
+            <!--</androidx.cardview.widget.CardView>-->
         </GridLayout>
 
-        <TextView
-            android:id="@+id/emailtxt"
-            android:layout_width="289dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="50dp"
-            android:text="Email"
-            android:textSize="10sp" />
+        <!--<TextView-->
+            <!--android:id="@+id/emailtxt"-->
+            <!--android:layout_width="289dp"-->
+            <!--android:layout_height="27dp"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginLeft="50dp"-->
+            <!--android:layout_marginTop="0dp"-->
+            <!--android:text="Email"-->
+            <!--android:textSize="10sp" />-->
 
         <!--<com.google.android.material.bottomnavigation.BottomNavigationView-->
-            <!--android:id="@+id/navigation"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="bottom"-->
-            <!--android:background="?android:attr/windowBackground"-->
-            <!--app:menu="@menu/menu_nav"></com.google.android.material.bottomnavigation.BottomNavigationView>-->
+        <!--android:id="@+id/navigation"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--android:background="?android:attr/windowBackground"-->
+        <!--app:menu="@menu/menu_nav"></com.google.android.material.bottomnavigation.BottomNavigationView>-->
 
         <!--<FrameLayout-->
-            <!--android:id="@+id/content"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:layout_weight="1"></FrameLayout>-->
+        <!--android:id="@+id/content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1"></FrameLayout>-->
 
 
     </LinearLayout>
