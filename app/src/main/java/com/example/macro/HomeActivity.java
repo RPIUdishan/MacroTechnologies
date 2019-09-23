@@ -100,12 +100,21 @@ public class HomeActivity extends AppCompatActivity
 
         FirebaseRecyclerAdapter<Product, ProductViewHolder> adapter = new FirebaseRecyclerAdapter<Product, ProductViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull ProductViewHolder holder, int i, @NonNull Product model) {
+            protected void onBindViewHolder(@NonNull ProductViewHolder holder, int i, @NonNull final Product model) {
 
                 holder.txtProductName.setText(model.getPname());
                 holder.txtProductDescription.setText(model.getDescription());
                 holder.txtProductPrice.setText("Price : "+model.getPrice());
                 Picasso.get().load(model.getImage()).into(holder.imageView);
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
+                        intent.putExtra("pid", model.getPid());
+                        startActivity(intent);
+                    }
+                });
 
             }
 
@@ -171,8 +180,8 @@ public class HomeActivity extends AppCompatActivity
         if (id == R.id.nav_cart) {
             Intent intent=new Intent(HomeActivity.this, CartActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_orders) {
-            Intent intent=new Intent(HomeActivity.this,OrderActivity.class);
+        } else if (id == R.id.nav_search) {
+            Intent intent=new Intent(HomeActivity.this,SearchActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_categories) {
             Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
