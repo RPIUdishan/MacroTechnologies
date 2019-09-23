@@ -37,7 +37,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SettingsActivity extends AppCompatActivity {
 
     private CircleImageView profileImageView;
-    private EditText nameEditText, emailEditText, addressEditText;
+    private EditText nameEditText, addressEditText,phoneEditText;
     private TextView profileChangeTextButton, closeTextButton, saveTextButton;
 
 
@@ -51,18 +51,19 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        storageProfilePictureReference = FirebaseStorage.getInstance().getReference().child("Profile pictures");
+        storageProfilePictureReference = FirebaseStorage.getInstance().getReference().child("Profile picturesProfile pictures");
 
         profileImageView = (CircleImageView) findViewById(R.id.settings_profile_image);
         nameEditText = (EditText)findViewById(R.id.settngs_user_name);
-        emailEditText = (EditText) findViewById(R.id.settngs_user_email);
         addressEditText = (EditText) findViewById(R.id.settngs_address);
+        phoneEditText=(EditText)findViewById(R.id.settngs_user_phone);
 
         profileChangeTextButton = (TextView) findViewById(R.id.profile_image_change_btn);
         closeTextButton = (TextView) findViewById(R.id.close_settings_btn);
         saveTextButton = (TextView) findViewById(R.id.update_settings_btn);
 
-        customerInfoDisplay(profileImageView, nameEditText, emailEditText, addressEditText);
+
+        customerInfoDisplay(profileImageView, nameEditText,  phoneEditText,addressEditText);
 
         closeTextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,14 +123,15 @@ public class SettingsActivity extends AppCompatActivity {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Customers");
 
         HashMap<String, Object> customerMap = new HashMap<>();
-        customerMap.put("name", nameEditText.getText().toString());
+
+        customerMap.put("userName", nameEditText.getText().toString());
         customerMap.put("address", addressEditText.getText().toString());
-        customerMap.put("email", emailEditText.getText().toString());
-        customerMap.put("image", myUrl);
+        customerMap.put("phone",phoneEditText.getText().toString());
 
         ref.child(Prevalent.currentCustomer.getEmail()).updateChildren(customerMap);
-
-        startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+        Prevalent.currentCustomer.setUserName(nameEditText.getText().toString());
+        Prevalent.currentCustomer.setImage(myUrl);
+        startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
         Toast.makeText(SettingsActivity.this, "Profile Information Updated", Toast.LENGTH_SHORT).show();
         finish();
 
@@ -141,13 +143,13 @@ public class SettingsActivity extends AppCompatActivity {
 
             Toast.makeText(this, "You should enter the name...", Toast.LENGTH_SHORT).show();
 
+        }else if (TextUtils.isEmpty(phoneEditText.getText().toString())){
+
+            Toast.makeText(this, "You should enter the phone...", Toast.LENGTH_SHORT).show();
+
         }else if (TextUtils.isEmpty(addressEditText.getText().toString())){
 
             Toast.makeText(this, "You should enter the address...", Toast.LENGTH_SHORT).show();
-
-        }else if (TextUtils.isEmpty(emailEditText.getText().toString())){
-
-            Toast.makeText(this, "You should enter the email...", Toast.LENGTH_SHORT).show();
 
         }else if (checker == "clicked"){
 
@@ -194,15 +196,16 @@ public class SettingsActivity extends AppCompatActivity {
                         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Customers");
 
                         HashMap<String, Object> customerMap = new HashMap<>();
-                        customerMap.put("name", nameEditText.getText().toString());
+
+                        customerMap.put("phone",phoneEditText.getText().toString());
+                        customerMap.put("userName", nameEditText.getText().toString());
                         customerMap.put("address", addressEditText.getText().toString());
-                        customerMap.put("email", emailEditText.getText().toString());
                         customerMap.put("image", myUrl);
 
                         ref.child(Prevalent.currentCustomer.getEmail()).updateChildren(customerMap);
 
                         progressDialog.dismiss();
-                        startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+                        startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
                         Toast.makeText(SettingsActivity.this, "Profile Information Updated", Toast.LENGTH_SHORT).show();
                         finish();
 
@@ -225,7 +228,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
-    private void customerInfoDisplay(final CircleImageView profileImageView, final EditText nameEditText, final EditText emailEditText, final EditText addressEditText) {
+    private void customerInfoDisplay(final CircleImageView profileImageView, final EditText nameEditText, final EditText phoneEditText, final EditText addressEditText) {
 
         DatabaseReference CustomerRef = FirebaseDatabase.getInstance().getReference().child("Customers").child(Prevalent.currentCustomer.getEmail());
 
@@ -235,13 +238,13 @@ public class SettingsActivity extends AppCompatActivity {
                 if(dataSnapshot.exists()){
                     if(dataSnapshot.child("image").exists()){
                         String image = dataSnapshot.child("image").getValue().toString();
-                        String name = dataSnapshot.child("name").getValue().toString();
-                        String email = dataSnapshot.child("email").getValue().toString();
+                        String name = dataSnapshot.child("userName").getValue().toString();
+                        String phone = dataSnapshot.child("phone").getValue().toString();
                         String address = dataSnapshot.child("address").getValue().toString();
 
                         Picasso.get().load(image).into(profileImageView);
                         nameEditText.setText(name);
-                        emailEditText.setText(email);
+                        phoneEditText.setText(phone);
                         addressEditText.setText(address);
                     }
                 }
