@@ -15,4 +15,39 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
     <string name="title_activity_category">CategoryActivity</string>
+    <string name="title_activity_store__management">Store_Management</string>
+
+
+    <string name="menu_store">Store</string>
+    <string name="menu_add">Add Item</string>
+    <string name="menu_setting">Setting</string>
+    <string name="menu_logout">Log Out</string>
+
+
+    <string name="des1" translatable="false">Intel Core i7-8550U 8th Gen processor. 8GB DDR4 RAM. 1TB. 15.6-inch screen, Nvidia GeForce 940MX 4GB Graphics.</string>
+    <string name="price1">LKR 120, 000. 00</string>
+    <string name="btnAdd">ADD</string>
+    <string name="btnRemove">REMOVE</string>
+    <string name="btnUpdate">UPDATE</string>
+    <string name="btnSubmit">SUBMIT</string>
+    <string name="des2">Form Factor M.2, Size - 250GB. Operating Temperature 0°C ~ 70°C</string>
+    <string name="price2">LKR 17, 000. 00</string>
+    <string name="adding_item">ADDING ITEM</string>
+    <string name="select_type">Select Type</string>
+    <string name="number_of_items">Number of Items</string>
+    <string name="price">price</string>
+    <string name="lkr">LKR</string>
+    <string name="description">Description</string>
+    <string name="upload_image">UPLOAD IMAGE</string>
+    <string name="category">category</string>
+    <string name="product_name">Product Name</string>
+
+    <string-array name="type_arrays">
+        <item>Laptop</item>
+        <item>Mouse and Keyboad</item>
+        <item>Monitor</item>
+        <item>Computer Parts</item>
+        <item>Desktop Computer</item>
+        <item>External Storage</item>
+    </string-array>
 </resources>
