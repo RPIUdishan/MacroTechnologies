@@ -49,7 +49,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         return productList.size();
     }
 
-    class ProductViewHolder extends RecyclerView.ViewHolder{
+    static class ProductViewHolder extends RecyclerView.ViewHolder{
 
         ImageView imageView;
         TextView textViewTitle,textViewDesc,textViewRating,textViewPrice;
