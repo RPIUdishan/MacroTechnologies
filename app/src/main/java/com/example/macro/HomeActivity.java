@@ -3,6 +3,7 @@ package com.example.macro;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.macro.Model.Cart;
 import com.example.macro.Model.Product;
 import com.example.macro.Prevalent.Prevalent;
 import com.example.macro.ViewHolder.ProductViewHolder;
@@ -63,8 +64,8 @@ public class HomeActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent=new Intent(HomeActivity.this, CartActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -81,7 +82,7 @@ public class HomeActivity extends AppCompatActivity
 
         CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
 
-        usernameTextView.setText(Prevalent.currentCustomer.getUserName());
+       usernameTextView.setText(Prevalent.currentCustomer.getUserName());
         Picasso.get().load(Prevalent.currentCustomer.getImage()).placeholder(R.drawable.profile).into(profileImageView);
 
         recyclerView = findViewById(R.id.recycle_menu);

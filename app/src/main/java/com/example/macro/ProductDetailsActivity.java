@@ -100,13 +100,15 @@ public class ProductDetailsActivity extends AppCompatActivity {
                             if(task.isSuccessful()){
                                 Toast.makeText(ProductDetailsActivity.this,"Added to the Cart", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(ProductDetailsActivity.this, HomeActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
+                                finish();
                             }
 
                         }
                     }) ;
 
-                    }
+                }
 
             }
         });
