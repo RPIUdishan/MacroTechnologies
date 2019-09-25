@@ -1,23 +1,20 @@
 package com.example.macro;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.example.macro.Model.SM_Products;
 import com.example.macro.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -32,39 +29,21 @@ import android.view.Menu;
 
 
 import android.content.Intent;
-import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import android.view.View;
 
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
 import android.view.MenuItem;
 
-import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.Menu;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import java.util.ArrayList;
+import android.widget.Toast;
 
 
 public class Store_Management extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -85,37 +64,7 @@ public class Store_Management extends AppCompatActivity implements NavigationVie
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             databaseReference = FirebaseDatabase.getInstance().getReference().child("Products_n");
-            /*listView = findViewById(R.id.List_View);
-            arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, arrayList);
-            listView.setAdapter(arrayAdapter);
-            databaseReference.addChildEventListener(new ChildEventListener() {
-                @Override
-                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    String value = dataSnapshot.getValue(SM_Products.class).toString();
-                    arrayList.add(value);
-                    arrayAdapter.notifyDataSetChanged();
-                }
 
-                @Override
-                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                }
-
-                @Override
-                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                }
-
-                @Override
-                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });*/
 
 
 
@@ -126,8 +75,8 @@ public class Store_Management extends AppCompatActivity implements NavigationVie
             recyclerView.setLayoutManager(layoutManager);
 
 
-            DrawerLayout drawer = findViewById(R.id.drawer_layout);
-            NavigationView navigationView = findViewById(R.id.nav_view);
+            DrawerLayout drawer = findViewById(R.id.SM_drawer_layout);
+            NavigationView navigationView = findViewById(R.id.SM_nav_view);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                     this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
             drawer.addDrawerListener(toggle);
@@ -147,11 +96,51 @@ public class Store_Management extends AppCompatActivity implements NavigationVie
         FirebaseRecyclerAdapter<SM_Products, ProductViewHolder> adapter =
                 new FirebaseRecyclerAdapter<SM_Products, ProductViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull ProductViewHolder productViewHolder, int i, @NonNull SM_Products sm_products) {
+                    protected void onBindViewHolder(@NonNull final ProductViewHolder productViewHolder, int i, @NonNull final SM_Products sm_products) {
                         productViewHolder.txtProductName.setText(sm_products.getPname());
                         productViewHolder.txtProductDescription.setText(sm_products.getDescription());
                         productViewHolder.txtProductPrice.setText(sm_products.getPrice());
                         Picasso.get().load(sm_products.getImage()).into(productViewHolder.imageView);
+
+                        productViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                CharSequence options[] = new CharSequence[]{
+                                        "Edit",
+                                        "Remove"
+                                };
+                                AlertDialog.Builder builder = new AlertDialog.Builder(Store_Management.this);
+                                builder.setTitle("Choose Options:");
+
+                                builder.setItems(options, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        if(i == 0){
+                                            Intent intent = new Intent(Store_Management.this, SM_Product_Details.class);
+                                            intent.putExtra("pid", sm_products.getPid());
+                                            startActivity(intent);
+                                        }
+
+                                        if (i == 1){
+                                            databaseReference.child(sm_products.getPid())
+                                                    .removeValue()
+                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()){
+                                                                Toast.makeText(Store_Management.this, "Item removed successfully.",Toast.LENGTH_SHORT).show();
+
+                                                            }
+                                                        }
+                                                    });
+                                        }
+                                    }
+                                });
+                                builder.show();
+                            }
+
+                        });
+
                     }
 
                     @NonNull
@@ -204,10 +193,10 @@ public class Store_Management extends AppCompatActivity implements NavigationVie
             // Handle navigation view item clicks here.
             int id = item.getItemId();
 
-            if (id == R.id.nav_store) {
+            if (id == R.id.nav_store_sm) {
                 Intent intent = new Intent(Store_Management.this, Store_Management.class);
                 startActivity(intent);
-            } else if (id == R.id.nav_add) {
+            } else if (id == R.id.nav_add_sm) {
                 Intent intent = new Intent(Store_Management.this, SM_Add_Items.class);
                 startActivity(intent);
             } else if (id == R.id.nav_setting) {
@@ -221,10 +210,6 @@ public class Store_Management extends AppCompatActivity implements NavigationVie
             return true;
         }
 
-        public void btnPressUpdate(View view) {
-            Intent intent1 = new Intent(Store_Management.this, SM_Update_Items.class);
-            startActivity(intent1);
-        }
 
         public void btnPressAdd(View view) {
             Intent intent2 = new Intent(Store_Management.this, SM_Add_Items.class);

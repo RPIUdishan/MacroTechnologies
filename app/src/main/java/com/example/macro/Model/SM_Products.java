@@ -7,19 +7,7 @@ public class SM_Products {
         public SM_Products(){
         }
 
-    @Override
-    public String toString() {
-        return "SM_Products{" +
-                "pname='" + pname + '\'' +
-                ", description='" + description + '\'' +
-                ", price='" + price + '\'' +
-                ", image='" + image + '\'' +
-                ", category='" + category + '\'' +
-                ", pid='" + pid + '\'' +
-                ", date='" + date + '\'' +
-                ", time='" + time + '\'' +
-                '}';
-    }
+
 
     public SM_Products(String pname, String description, String price, String image, String category, String pid, String date, String time) {
             this.pname = pname;

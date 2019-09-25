@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 }else{
-                    Toast.makeText(LoginActivity.this,"This " +email+ " email doea not exists..", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"This " +email+ " email does not exists..", Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
 
                 }

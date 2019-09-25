@@ -57,13 +57,13 @@ public class SM_Add_Items extends AppCompatActivity  {
         productImageRef = FirebaseStorage.getInstance().getReference().child("{ProductImages");
         productRef = FirebaseDatabase.getInstance().getReference().child("Products_n");
 
-        editTextPname = findViewById(R.id.editTxt_pname);
+        editTextPname = findViewById(R.id.editTxt_pName);
         editTextPrice = findViewById(R.id.editTxt_price);
         editTextDescription = findViewById(R.id.editTxt_description);
-        editTextCategory = findViewById(R.id.editTxt_category);
+        editTextCategory = findViewById(R.id.editText_category);
 
         buttonSubmit = findViewById(R.id.btn_submit);
-        imageUpload = findViewById(R.id.imageUpload);
+        imageUpload = findViewById(R.id.image_Upload);
 
 
         imageUpload.setOnClickListener(new View.OnClickListener() {
@@ -92,11 +92,11 @@ public class SM_Add_Items extends AppCompatActivity  {
         }
 
         else if (TextUtils.isEmpty(pName)){
-            Toast.makeText(this,"Please write product Name description..",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Please write product Name..",Toast.LENGTH_SHORT).show();
         }
 
         else if (TextUtils.isEmpty(price)){
-            Toast.makeText(this,"Please write price description..",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Please enter price..",Toast.LENGTH_SHORT).show();
         }
 
         else if (TextUtils.isEmpty(description)){
@@ -117,7 +117,7 @@ public class SM_Add_Items extends AppCompatActivity  {
     private void storeProductInformation() {
 
         loadingBar.setTitle("Adding new products");
-        loadingBar.setMessage("Plese wait. while we are adding new products");
+        loadingBar.setMessage("Please wait. while we are adding new products");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
 
@@ -185,7 +185,7 @@ public class SM_Add_Items extends AppCompatActivity  {
         productMap.put("image",downloadImageUrl);
         productMap.put("category",category);
         productMap.put("price",price);
-        productMap.put("pName",pName);
+        productMap.put("pname",pName);
 
         productRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

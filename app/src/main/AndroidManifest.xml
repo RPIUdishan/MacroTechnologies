@@ -9,14 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".SM_Update_Items"></activity>
+        <activity android:name=".SM_Product_Details"></activity>
         <activity android:name=".SM_Add_Items" />
         <activity
             android:name=".Store_Management"
             android:label="@string/title_activity_store__management"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
-
         <activity
             android:name=".CategoryActivity"
             android:label="@string/title_activity_category"
@@ -38,9 +36,9 @@
             </intent-filter>
         </activity>
     </application>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
