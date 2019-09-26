@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/logo_bg"
     tools:context=".MainActivity">
-    <!--
-    <ImageView
-        android:id="@+id/app_logo"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/items_recyclerView"
+        android:layout_width="393dp"
+        android:layout_height="460dp"
         android:layout_marginTop="60dp"
-        android:src="@drawable/applogo"
-        />
-       -->
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="8dp" />
 
-    <Button
-        android:id="@+id/main_login_btn"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="400dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="224dp"
-        android:background="@drawable/buttons"
-        android:text="Sign In"
-        android:textAlignment="center" />
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="412dp"
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="-1dp"
+        tools:layout_editor_absoluteY="8dp">
 
-    <Button
-        android:id="@+id/main_join_now_btn"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="600dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="137dp"
-        android:background="@drawable/buttons"
-        android:text="Sign Up"
-        android:textAlignment="center" />
-</RelativeLayout>
+        <Button
+            android:id="@+id/orderComBtn"
+            android:layout_width="193dp"
+            android:layout_height="47dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="10dp"
+            android:text="Completed Orders"
+            app:layout_constraintEnd_toStartOf="@+id/OrderBtn"
+            tools:layout_editor_absoluteY="8dp" />
+
+        <Button
+            android:id="@+id/OrderBtn"
+            android:layout_width="205dp"
+            android:layout_height="46dp"
+            android:text="Oders"
+            tools:layout_editor_absoluteX="200dp"
+            tools:layout_editor_absoluteY="9dp" />
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
