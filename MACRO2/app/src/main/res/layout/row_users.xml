@@ -9,7 +9,12 @@
     android:elevation="5dp"
     android:layout_marginStart="-5dp"
     app:cardBackgroundColor="#ffff"
+
+    app:contentPadding="3dp"
+    android:layout_marginTop="1dp">
+
     app:contentPadding="3dp">
+
 
     <LinearLayout
         android:layout_width="264dp"
@@ -52,6 +57,15 @@
         android:fontFamily="@font/poppins_light"
         android:text="Person Email"
         android:textColor="@color/colorBlack" />
+
+    <ImageButton
+        android:onClick="delete"
+        android:id="@+id/deleteBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="310dp"
+        android:layout_marginTop="8dp"
+        android:background="#fff"
 
     <ImageView
         android:onClick="delete"

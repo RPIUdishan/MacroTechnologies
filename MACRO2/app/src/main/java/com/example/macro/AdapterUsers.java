@@ -1,11 +1,18 @@
 package com.example.macro;
 
+
+import android.app.ProgressDialog;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import android.widget.EditText;
+import android.widget.ImageButton;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +20,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
+
+
+import com.blogspot.atifsoftwares.circularimageview.CircularImageView;
+import com.bumptech.glide.Glide;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,6 +36,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import com.google.firebase.storage.StorageReference;
+
 import com.squareup.picasso.Picasso;
 
 import java.sql.Timestamp;
@@ -55,8 +70,17 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
     public void onBindViewHolder(@NonNull MyHolder myHolder, final int i) {
         //get data
         String userImage = userList.get(i).getImage();
+
+        final String userName = userList.get(i).getName();
+        final String userEmail = userList.get(i).getEmail();
+
+        final DatabaseReference ref;
+        ref = FirebaseDatabase.getInstance().getReference("Users");
+
+
         String userName = userList.get(i).getName();
         final String userEmail = userList.get(i).getEmail();
+
 
         //set data
         myHolder.mNameTv.setText(userName);
@@ -78,6 +102,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
             }
         });
 
+
         //click to show delete dialog box
         myHolder.mDeleteIv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +113,25 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
                 builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
+                        Query mQuery = ref.orderByChild("name").equalTo(userName);
+                        mQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for (DataSnapshot ds: dataSnapshot.getChildren()){
+                                    ds.getRef().removeValue();//remove data while match names
+                                }
+                               // Toast.makeText(UsersActivity.class, "User Deleted", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                               // Toast.makeText(AdapterUsers.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
                         //deleteUser(i);
+
                     }
                 });
                 //cancel delete button
@@ -99,11 +142,17 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
                                 dialog.dismiss();
                             }
                         });
+
+                //create and show dialog
+
                         //create and show dialog
+
                 builder.create().show();
             }
         });
     }
+
+
 
 //    private void deleteUser(int position) {
 //
@@ -139,12 +188,22 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
 //        });
 //    }
 
+
     @Override
     public int getItemCount() {
         return userList.size();
     }
 
     //view holder class
+
+   public static class MyHolder extends RecyclerView.ViewHolder {
+
+        ImageView mAvatarIv;
+        ImageButton mDeleteIv;
+        TextView mNameTv, mEmailTv;
+
+
+
     class MyHolder extends RecyclerView.ViewHolder{
 
         ImageView mAvatarIv;
@@ -155,13 +214,27 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
             super(itemView);
 
             //init views
+
+            mDeleteIv = itemView.findViewById(R.id.deleteBtn);
+
             mDeleteIv = itemView.findViewById(R.id.deleteIv);
+
             mAvatarIv = itemView.findViewById(R.id.avatarIv);
             mNameTv = itemView.findViewById(R.id.nameTv);
             mEmailTv = itemView.findViewById(R.id.emailTv);
 
+        }
 
+        public void setPrfile(Context context, String url){
+            Glide.with(context).load(url).into(mAvatarIv);
+        }
 
+        public void setDetails(String name, String email){
+            TextView mName =  itemView.findViewById(R.id.nameTv);
+            TextView mEmail = itemView.findViewById(R.id.emailTv);
+
+            mName.setText(name);
+            mEmail.setText(email);
 
 
         }

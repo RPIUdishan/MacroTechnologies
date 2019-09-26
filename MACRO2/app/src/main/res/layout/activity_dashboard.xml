@@ -23,6 +23,7 @@
             android:layout_marginRight="20dp">
 
             <TextView
+                android:id="@+id/dName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="85dp"
@@ -44,12 +45,15 @@
                 android:id="@+id/propic"
                 android:layout_width="62dp"
                 android:layout_height="62dp"
-                android:src="@drawable/person" />
+                android:src="@drawable/ic_deafault_img_white" />
         </RelativeLayout>
 
         <GridLayout
             android:layout_width="match_parent"
+            android:layout_height="219dp"
+
             android:layout_height="403dp"
+
             android:alignmentMode="alignMargins"
             android:columnCount="2"
             android:columnOrderPreserved="false"
@@ -121,6 +125,69 @@
 
             </androidx.cardview.widget.CardView>
 
+
+            <!--<androidx.cardview.widget.CardView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_rowWeight="1"-->
+            <!--android:layout_columnWeight="1"-->
+            <!--android:layout_margin="25dp"-->
+            <!--app:cardCornerRadius="12dp"-->
+            <!--app:cardElevation="6dp">-->
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:gravity="center"-->
+            <!--android:orientation="vertical"-->
+            <!--android:padding="16dp">-->
+
+            <!--<ImageView-->
+            <!--android:layout_width="80dp"-->
+            <!--android:layout_height="80dp"-->
+            <!--android:src="@drawable/trans" />-->
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Transport"-->
+            <!--android:textColor="#6f6f6f"-->
+            <!--android:textSize="18sp" />-->
+
+            <!--</LinearLayout>-->
+
+            <!--</androidx.cardview.widget.CardView>-->
+
+            <!--<androidx.cardview.widget.CardView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_rowWeight="1"-->
+            <!--android:layout_columnWeight="1"-->
+            <!--android:layout_margin="25dp"-->
+            <!--app:cardCornerRadius="12dp"-->
+            <!--app:cardElevation="6dp">-->
+
+            <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:orientation="vertical"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:padding="16dp">&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="80dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="80dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:src="@drawable/finance" />&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:text="Finance"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textColor="#6f6f6f"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textSize="18sp" />&ndash;&gt;-->
+
+            <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -182,6 +249,7 @@
                         <!--&lt;!&ndash;android:textSize="18sp" />&ndash;&gt;-->
 
                 <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
 
             <!--</androidx.cardview.widget.CardView>-->
         </GridLayout>
