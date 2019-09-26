@@ -21,7 +21,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     //Views
     ImageView employeeBtn, proPic;
-    TextView mDashboardTv;
+    TextView mDashboardTv, mDashNameTv;
     //firebase auth
     FirebaseAuth firebaseAuth;
 
@@ -59,56 +59,13 @@ public class DashboardActivity extends AppCompatActivity {
         //init
         firebaseAuth = FirebaseAuth.getInstance();
 
-        //bottom navigation
-//        BottomNavigationView navigationView = findViewById(R.id.navigation);
-//        navigationView.setOnNavigationItemSelectedListener(selectedListener);
-
-        //home fragment transaction
-        //actionBar.setTitle("Home");
-//        HomeFragment fragment1 = new HomeFragment();
-//        FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
-//        ft1.replace(R.id.content, fragment1, "");
-//        ft1.commit();
 
         //init views
         mDashboardTv = findViewById(R.id.emailtxt);
+        mDashNameTv = findViewById(R.id.dName);
     }
 
-//    private BottomNavigationView.OnNavigationItemSelectedListener selectedListener =
-//            new BottomNavigationView.OnNavigationItemSelectedListener() {
-//                @Override
-//                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-//                    //handle item clicks
-//                    switch (menuItem.getItemId()){
-//                        case R.id.nav_home:
-//                            //home fragment transaction
-//                           // actionBar.setTitle("Home");
-//                            HomeFragment fragment1 = new HomeFragment();
-//                            FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
-//                            ft1.replace(R.id.content, fragment1, "");
-//                            ft1.commit();
-//                            return true;
-//                        case R.id.nav_profile:
-//                            //profile fragment transaction
-//                            //actionBar.setTitle("Profile");
-//                            ProfileFragment fragment2 = new ProfileFragment();
-//                            FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
-//                            ft2.replace(R.id.content, fragment2, "");
-//                            ft2.commit();
-//                            return true;
-//                        case R.id.nav_users:
-//                            //users fragment transaction
-//                            //profile fragment transaction
-//                            //actionBar.setTitle("Users");
-//                            UsersFragment fragment3 = new UsersFragment();
-//                            FragmentTransaction ft3 = getSupportFragmentManager().beginTransaction();
-//                            ft3.replace(R.id.content, fragment3, "");
-//                            ft3.commit();
-//                            return true;
-//                    }
-//                    return false;
-//                }
-//            };
+
 
     private void checkUserStatus(){
         //get current user
@@ -117,6 +74,7 @@ public class DashboardActivity extends AppCompatActivity {
             //user is signed in stay here
             //set email of logged in user
             mDashboardTv.setText(user.getEmail());
+            mDashNameTv.setText(user.getDisplayName());
         }
         else{
             //user not signed in, go to main activity
@@ -137,25 +95,5 @@ public class DashboardActivity extends AppCompatActivity {
         //check on start of app
         checkUserStatus();
         super.onStart();
-    }
-    /*inflate options menu*/
-    public boolean OnCreateOptionsMenu(Menu menu){
-        //inflating enu
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    /*handle menu item clicks*/
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        //get item id
-        int id = item.getItemId();
-        if (id == R.id.action_logout){
-            firebaseAuth.signOut();
-            checkUserStatus();
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

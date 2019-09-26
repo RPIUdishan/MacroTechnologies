@@ -18,35 +18,23 @@ public class EmployeeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_employee);
 
         //init Views
-//        mCreateBtn = findViewById(R.id.create_btn);
-//        mListBtn = findViewById(R.id.list_btn);
-//
-//        //handle create button click
-//        mCreateBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(EmployeeActivity.this, CreateActivity.class));
-//            }
-//        });
-
+        mListBtn = findViewById(R.id.list_btn);
+        mListBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EmployeeActivity.this, UsersActivity.class);
+                startActivity(intent);
+            }
+        });
         mCreateBtn = findViewById(R.id.create_btn);
-
         mCreateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                //start RegisterActivity
                 Intent intent = new Intent(EmployeeActivity.this, CreateActivity.class);
                 startActivity(intent);
             }
         });
-
-//        mCreateBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //start RegisterActivity
-//                Intent intent = new Intent(EmployeeActivity.this, CreateActivity.class);
-//                startActivity(intent);
-//            }
-//        });
 
     }
 }

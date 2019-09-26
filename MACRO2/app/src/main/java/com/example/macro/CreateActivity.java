@@ -59,6 +59,7 @@ public class CreateActivity extends AppCompatActivity {
         mPasswordEt = findViewById(R.id.passEt);
         mCreateBtn = findViewById(R.id.create_btn);
 
+
         //In the onCreate() method, initialize the FirebaseAuth instance.
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -104,7 +105,7 @@ public class CreateActivity extends AppCompatActivity {
                             progressDialog.dismiss();
                             FirebaseUser user = mAuth.getCurrentUser();
                             //Get user email and uid from auth
-                            String email = user.getEmail();
+                           String email = user.getEmail();
                             String uid = user.getUid();
                             //When user is registered store user info in firebase realtime database too
                             //using HashMap

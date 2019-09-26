@@ -4,14 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.MenuItemCompat;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -22,10 +20,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +43,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
@@ -76,13 +79,16 @@ public class ProfileActivity extends AppCompatActivity {
     private static final int IMAGE_PICK_GALLERY_CODE = 300;
     private static final int IMAGE_PICK_CAMERA_CODE = 400;
     //array of permission to be request
-    String cameraPermission[];
-    String storagePermission[];
+    String[] cameraPermission;
+    String[] storagePermission;
 
     //uri picked image
     Uri image_uri;
 
     //for checking profile photo or cover photo
+    /**
+     *
+     */
     String profileOrCoverPhoto;
 
     @Override
@@ -91,8 +97,10 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         //Actionbar and its title
-        ActionBar actionBar = getSupportActionBar();
+       // ActionBar actionBar = getSupportActionBar();
         //actionBar.setTitle("Profile");
+
+        Button mLogoutBtn;
 
         //init firebase
         firebaseAuth = FirebaseAuth.getInstance();
@@ -100,6 +108,7 @@ public class ProfileActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Users");
         storageReference = getInstance().getReference(); //firebase storage referance
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         //init arrays of permissions
         cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -114,7 +123,7 @@ public class ProfileActivity extends AppCompatActivity {
         fab = findViewById(R.id.fab);
 
         //init progress dialog
-        pd = new ProgressDialog(this);
+        pd = new ProgressDialog(ProfileActivity.this);
 
         //get values using user email and id
         Query query = databaseReference.orderByChild("email").equalTo(user.getEmail());
@@ -170,16 +179,34 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        mLogoutBtn = findViewById(R.id.logout_btn);
+        mLogoutBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+
+
+
+            }
+        });
+
     }
 
     private boolean checkStoragePermission(){
         boolean result = ContextCompat.checkSelfPermission(ProfileActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                == (PackageManager.PERMISSION_GRANTED);
+                == (PackageManager.PERMISSION_GRANTED
+        );
         return result;
     }
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void requestStoragePermission(){
         //request runtime storage permission
+        ActivityCompat.requestPermissions(ProfileActivity.this, storagePermission, STORAGE_REQUEST_CODE);
         requestPermissions(storagePermission, STORAGE_REQUEST_CODE);
     }
 
@@ -422,6 +449,7 @@ public class ProfileActivity extends AppCompatActivity {
                             //image uploaded
                             //add/update uri in user's database
                             HashMap<String, Object>results = new HashMap<>();
+                            assert downloadUri != null;
                             results.put(profileOrCoverPhoto, downloadUri.toString());
 
                             databaseReference.child(user.getUid()).updateChildren(results)
@@ -479,4 +507,52 @@ public class ProfileActivity extends AppCompatActivity {
         galleryIntent.setType("image/*");
         startActivityForResult(galleryIntent, IMAGE_PICK_GALLERY_CODE);
     }
-}
+
+
+
+
+    /*inflate options menu*/
+
+//    public boolean onCreateOptionsMenu(Menu menu) {
+
+     //   MenuItem item = menu.findItem(R.id.action_search);
+ //       SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+
+        //search listner
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+////            public boolean onQueryTextSubmit(String s) {
+////                //called when user pressed search button from keayboard
+////                //search query is not empty then search
+////                if (!TextUtils.isEmpty(s.trim())){
+////
+////                }
+////                else{
+////                    //search text empty, get all users
+////                    getAllUsers();
+////                }
+////                return false;
+////            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                return false;
+//            }
+//        });
+//        super.onCreateOptionsMenu(menu);
+//        return false;
+    }
+
+    /*handle menu item clicks*/
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        //get item id
+//        int id = item.getItemId();
+//        if (id == R.id.action_logout){
+//            firebaseAuth.signOut();
+//            checkUserStatus();
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
+//}

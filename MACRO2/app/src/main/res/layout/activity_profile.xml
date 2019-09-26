@@ -36,11 +36,9 @@
                     android:id="@+id/avatarIv"
                     android:layout_marginStart="20dp"
                     android:background="@color/colorAccent"
-                    android:padding="5dp"
                     android:src="@drawable/ic_deafault_img_white"
                     android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_marginLeft="20dp"/>
+                    android:layout_height="120dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -91,6 +89,15 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="10dp"/>
 
+    <Button
+        android:id="@+id/logout_btn"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="350dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/btnred"
+        android:text="Logout" />
 
 
     <!--<FrameLayout-->
