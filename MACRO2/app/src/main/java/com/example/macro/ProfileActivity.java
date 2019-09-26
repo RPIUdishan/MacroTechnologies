@@ -509,11 +509,27 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
+    private void checkUserStatus(){
+        //get current user
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null){
+            //user is signed in stay here
+            //set email of logged in user
+            //mDashboardTv.setText(user.getEmail());
+        }
+        else{
+            //user not signed in, go to main activity
+            startActivity(new Intent(ProfileActivity.this, EmployeeActivity.class));
+            this.finish();
+        }
+    }
+
 
 
     /*inflate options menu*/
 
 //    public boolean onCreateOptionsMenu(Menu menu) {
+
 
      //   MenuItem item = menu.findItem(R.id.action_search);
  //       SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
@@ -533,6 +549,27 @@ public class ProfileActivity extends AppCompatActivity {
 ////                }
 ////                return false;
 ////            }
+
+//
+//        MenuItem item = menu.findItem(R.id.action_search);
+//        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+//
+//        //search listner
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String s) {
+//                //called when user pressed search button from keayboard
+//                //search query is not empty then search
+//                if (!TextUtils.isEmpty(s.trim())){
+//
+//                }
+//                else{
+//                    //search text empty, get all users
+//                    getAllUsers();
+//                }
+//                return false;
+//            }
+
 //
 //            @Override
 //            public boolean onQueryTextChange(String newText) {
@@ -541,6 +578,7 @@ public class ProfileActivity extends AppCompatActivity {
 //        });
 //        super.onCreateOptionsMenu(menu);
 //        return false;
+
     }
 
     /*handle menu item clicks*/
@@ -556,3 +594,21 @@ public class ProfileActivity extends AppCompatActivity {
 //        return super.onOptionsItemSelected(item);
 //    }
 //}
+
+//    }
+
+    /*handle menu item clicks*/
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //get item id
+        int id = item.getItemId();
+        if (id == R.id.action_logout){
+            firebaseAuth.signOut();
+            checkUserStatus();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+}
+
